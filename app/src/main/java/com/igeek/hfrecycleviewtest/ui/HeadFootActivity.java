@@ -42,19 +42,28 @@ public class HeadFootActivity extends Activity implements
         topView = getLayoutInflater().inflate(R.layout.layout_topview, null);
         if (adapter == null) {
             adapter = new TestSingleFHFSingleTypeRecyAdapter(R.layout.layout_recy_item);
+            //添加头部
             adapter.setHeadView(topView);
+            //添加底部
             adapter.setFootView(loadingView);
+            //添加item的点击事件
             adapter.setItemClickListener(this);
+            //添加item的长按事件
             adapter.setItemLongClickListener(this);
+            //添加头部的点击事件
             adapter.setHeadClickListener(this);
+            //添加底部的点击事件
             adapter.setFootClickListener(this);
+            //处理item当中子视图的点击事件
             adapter.addSubViewListener(R.id.item_btn, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(HeadFootActivity.this," 你点击了第 "+view.getTag().toString()+" 个button",Toast.LENGTH_SHORT).show();
                 }
             });
+            //处理头部当中子视图的点击事件
             adapter.addHeadSubViewListener(R.id.topview_text, headlistener);
+            //处理底部当中子视图的点击事件
             adapter.addFootSubViewListener(R.id.nodataview_text, footlistener);
         }
         recyclerView.setAdapter(adapter);
