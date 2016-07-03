@@ -1,0 +1,3 @@
+# HFRecycleView
+带头部(headView)和底部(footView)和点击事件的RecycleView
+##带headview和footview的recycleview。分装了recycleview.adater里面的初始化和构建。更加便捷的使用的recycleview
