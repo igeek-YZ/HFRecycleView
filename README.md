@@ -4,7 +4,7 @@
 
 #### 效果图 
 
-<img src="https://github.com/igeek-YZ/LineChartView/blob/master/pics/hfrecycleview.gif" width = "519" height = "485" alt="960" align=center />
+<img src="https://github.com/igeek-YZ/HFRecycleView/blob/master/pics/hfrecycleview.gif" width = "423" height = "693" alt="693" align=center />
 
 ###xml文件
 
