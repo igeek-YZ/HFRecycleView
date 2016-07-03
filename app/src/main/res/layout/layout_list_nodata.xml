@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView
+        android:clickable="true"
+        android:id="@+id/nodataview_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="亲,没有数据可加载洛"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="20sp" />
+
+
+</LinearLayout>

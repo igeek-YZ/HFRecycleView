@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">HFRecycleViewTest</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_head_foot">HeadFootActivity</string>
+    <string name="title_activity_foot">FootActivity</string>
+    <string name="title_activity_grid">GridActivity</string>
+    <string name="title_activity_grid_flow_acitvity">GridFlowAcitvity</string>
+</resources>
