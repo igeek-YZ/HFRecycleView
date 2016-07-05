@@ -4,11 +4,7 @@
 
 #### 效果图 
 
-<<<<<<< HEAD
-<img src="https://github.com/igeek-YZ/HFRecycleView/blob/master/pics/hfrecycleview.gif" width = "423" height = "693" alt="693" align=center />
-=======
-<img src="https://github.com/igeek-YZ/HFRecycleView/blob/master/hfrecycleview.gif" width = "338" height = "554" alt="554" align=center />
->>>>>>> origin/master
+<img src="https://github.com/igeek-YZ/HFRecycleView/blob/master/pics/hfrecycleview.gif" width = "338" height = "554" alt="554" align=center />
 
 ###xml文件
 
