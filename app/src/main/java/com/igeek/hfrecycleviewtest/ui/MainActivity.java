@@ -31,4 +31,8 @@ public class MainActivity extends Activity {
         startActivity(new Intent(this,GridFlowAcitvity.class));
     }
 
+    public void mulitype(View view){
+        startActivity(new Intent(this,mulitTypeActivity.class));
+    }
+
 }

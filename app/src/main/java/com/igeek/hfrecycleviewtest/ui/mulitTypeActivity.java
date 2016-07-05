@@ -1,7 +1,6 @@
 package com.igeek.hfrecycleviewtest.ui;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,22 +11,26 @@ import android.widget.Toast;
 import com.igeek.hfrecycleviewtest.R;
 import com.igeek.hfrecyleviewlib.BasicRecyViewHolder;
 import com.igeek.hfrecyleviewlib.HFLineVerComDecoration;
+import com.igeek.hfrecyleviewlib.HolderTypeData;
 import com.igeek.hfrecyleviewlib.RecycleScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import adapter.TestSingleFHFSingleTypeRecyAdapter;
+import adapter.TestMulitTypeRecyAdapter;
+import bean.TypeData1;
+import bean.TypeData2;
+import bean.TypeData3;
+import bean.TypeData4;
 
-
-public class HeadFootActivity extends Activity implements
+public class mulitTypeActivity extends Activity implements
         BasicRecyViewHolder.OnItemClickListener,
         BasicRecyViewHolder.OnItemLongClickListener,
         BasicRecyViewHolder.OnHeadViewClickListener,
         BasicRecyViewHolder.OnFootViewClickListener {
 
     RecyclerView recyclerView;
-    TestSingleFHFSingleTypeRecyAdapter adapter;
+    TestMulitTypeRecyAdapter adapter;
 
     View loadingView;
     View nodataView;
@@ -43,7 +46,7 @@ public class HeadFootActivity extends Activity implements
         nodataView = getLayoutInflater().inflate(R.layout.layout_list_nodata, null);
         topView = getLayoutInflater().inflate(R.layout.layout_topview, null);
         if (adapter == null) {
-            adapter = new TestSingleFHFSingleTypeRecyAdapter(R.layout.layout_recy_item);
+            adapter = new TestMulitTypeRecyAdapter();
             //添加头部
             adapter.setHeadView(topView);
             //添加底部
@@ -60,7 +63,7 @@ public class HeadFootActivity extends Activity implements
             adapter.addSubViewListener(R.id.item_btn, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(HeadFootActivity.this," 你点击了第 "+view.getTag().toString()+" 个button",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mulitTypeActivity.this, " 你点击了第 " + view.getTag().toString() + " 个button", Toast.LENGTH_SHORT).show();
                 }
             });
             //处理头部当中子视图的点击事件
@@ -69,36 +72,37 @@ public class HeadFootActivity extends Activity implements
             adapter.addFootSubViewListener(R.id.nodataview_text, footlistener);
         }
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new HFLineVerComDecoration(1, Color.parseColor("#929292")));
         recyclerView.addOnScrollListener(srcollListener);
+        recyclerView.addItemDecoration(new HFLineVerComDecoration(1, getResources().getColor(R.color.colorAccent)));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter.refreshDatas(buildListByPosition(0));
+
     }
 
-    View.OnClickListener headlistener=new  View.OnClickListener(){
+    View.OnClickListener headlistener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Toast.makeText(HeadFootActivity.this," 你点击了顶部headView当中的文本",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mulitTypeActivity.this, " 你点击了顶部headView当中的文本", Toast.LENGTH_SHORT).show();
         }
     };
 
-    View.OnClickListener footlistener=new  View.OnClickListener(){
+    View.OnClickListener footlistener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Toast.makeText(HeadFootActivity.this," 你点击了底部footView当中的文本",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mulitTypeActivity.this, " 你点击了底部footView当中的文本", Toast.LENGTH_SHORT).show();
         }
     };
 
     @Override
     public void OnItemClick(View v, int adapterPosition) {
         //adapterPosition 的位置不一定是数据集当中的位置 获取真实的位置通过  adapter.getPositon(adapterPosition) 获得
-        Toast.makeText(this, "你点击了第 "+adapter.getPositon(adapterPosition)+" 个数据item", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "你点击了第 " + adapter.getPositon(adapterPosition) + " 个数据item", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void OnItemLongClick(View v, int adapterPosition) {
         //adapterPosition 的位置不一定是数据集当中的位置 获取真实的位置通过  adapter.getPositon(adapterPosition) 获得
-        Toast.makeText(this, "你长按了第 "+adapter.getPositon(adapterPosition)+" 个数据item", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "你长按了第 " + adapter.getPositon(adapterPosition) + " 个数据item", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -114,10 +118,10 @@ public class HeadFootActivity extends Activity implements
     public RecycleScrollListener srcollListener = new RecycleScrollListener() {
         @Override
         public void loadMore() {
-            if (adapter.getDatas().size() >20) {
+            if (adapter.getDatas().size() > 20) {
                 adapter.updateFootView(nodataView);
             } else {
-                handler.sendEmptyMessageDelayed(0,2000);
+                handler.sendEmptyMessageDelayed(0, 2000);
             }
         }
 
@@ -128,7 +132,7 @@ public class HeadFootActivity extends Activity implements
         }
     };
 
-    android.os.Handler handler=new android.os.Handler(){
+    android.os.Handler handler = new android.os.Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -137,17 +141,40 @@ public class HeadFootActivity extends Activity implements
         }
     };
 
-    public List<String> buildListByPosition(int position) {
+    public List<HolderTypeData> buildListByPosition(int position) {
 
-        List<String> titles = new ArrayList<String>();
+        List<HolderTypeData> datas = new ArrayList<HolderTypeData>();
 
-        int target=position+10;
+        int target = position + 10;
 
-        for (;position < target; position++) {
-            titles.add("position " + position);
+        for (; position < target; position++) {
+
+            HolderTypeData data;
+
+            if (position % 2 == 0) {
+                data = new TypeData2("typedata2", "第三种视图的标题_" + position);
+            } else if (position % 3 == 0) {
+                data = new TypeData3("typedata3", "第三种视图的标题_" + position);
+            } else if (position % 5 == 0) {
+                data = new TypeData4("typedata4", buildResIds());
+            } else {
+                data = new TypeData1("book", "第一种视图的标题_" + position);
+            }
+
+            datas.add(data);
         }
 
-        return titles;
+        return datas;
     }
+
+    public List<Integer> buildResIds() {
+        ArrayList<Integer> resIds = new ArrayList<Integer>();
+        for (int index = 0; index < 4; index++) {
+            resIds.add(R.mipmap.ic_test2);
+        }
+
+        return resIds;
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.igeek.hfrecycleviewtest.ui;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.igeek.hfrecycleviewtest.R;
 import com.igeek.hfrecyleviewlib.BasicRecyViewHolder;
+import com.igeek.hfrecyleviewlib.HFLineVerComDecoration;
 import com.igeek.hfrecyleviewlib.RecycleScrollListener;
 
 import java.util.ArrayList;
@@ -49,6 +51,7 @@ public class FootActivity extends Activity implements
             });
         }
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new HFLineVerComDecoration(1, Color.parseColor("#929292")));
         recyclerView.addOnScrollListener(srcollListener);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

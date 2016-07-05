@@ -121,7 +121,7 @@ public class GridFlowAcitvity extends Activity implements
         for (; position < target; position++) {
             RandomEntity entity = new RandomEntity();
             entity.setTitle("position " + position);
-            entity.setHeight(100+(new Random().nextInt(200)));
+            entity.setHeight(200+(new Random().nextInt(400)));
             entities.add(entity);
         }
 

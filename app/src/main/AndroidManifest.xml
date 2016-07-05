@@ -33,6 +33,10 @@
         <activity
             android:name=".ui.GridFlowAcitvity"
             android:label="@string/title_activity_grid_flow_acitvity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.mulitTypeActivity"
+            android:label="@string/title_activity_mulit_type"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

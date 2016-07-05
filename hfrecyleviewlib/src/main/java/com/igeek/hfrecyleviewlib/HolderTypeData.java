@@ -11,5 +11,5 @@ public abstract class HolderTypeData<VH extends BasicRecyViewHolder> {
 
     public abstract BasicRecyViewHolder buildHolder(ViewGroup parent);
 
-    public abstract void bindDatatoHolder(VH vh,int type);
+    public abstract void bindDatatoHolder(VH vh,int postion,int type);
 }

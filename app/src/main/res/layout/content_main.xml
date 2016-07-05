@@ -8,25 +8,31 @@
 
     <Button
         android:onClick="headfoot"
-        android:text="包含头部和底部(recycleView_linear)"
+        android:text="列表(recycleView_linear)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
         android:onClick="foot"
-        android:text="仅包含底部(recycleView_linear)"
+        android:text="列表_仅包含底部(recycleView_linear)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
         android:onClick="grid"
-        android:text="仅包含底部(recycleView_grid)"
+        android:text="网格(recycleView_grid)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
         android:onClick="gridFlow"
-        android:text="仅包含底部(recycleView_gridFlow)"
+        android:text="瀑布流(recycleView_gridFlow)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:onClick="mulitype"
+        android:text="多类型视图(recycleView_mulitype)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

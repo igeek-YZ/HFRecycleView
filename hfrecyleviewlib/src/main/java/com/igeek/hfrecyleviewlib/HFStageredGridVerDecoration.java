@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
+import com.igeek.hfrecyleviewlib.utils.DensityUtils;
+
 
 /**
  *
@@ -15,8 +17,8 @@ public class HFStageredGridVerDecoration extends RecyclerView.ItemDecoration {
 
     private int gapSize;
 
-    public HFStageredGridVerDecoration(int gapSize) {
-        this.gapSize = gapSize;
+    public HFStageredGridVerDecoration(int gapSizedp) {
+        this.gapSize = DensityUtils.dp2px(gapSizedp);
 
     }
 
