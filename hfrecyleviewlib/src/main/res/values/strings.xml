@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">HFRecyleViewLib</string>
+    <string name="app_name"></string>
+    <string name="pulling">下拉刷新</string>
+    <string name="pulling_refresh">松开加载</string>
+    <string name="pulling_refreshing">正在加载</string>
+    <string name="pulling_refreshfinish">加载完成</string>
 </resources>

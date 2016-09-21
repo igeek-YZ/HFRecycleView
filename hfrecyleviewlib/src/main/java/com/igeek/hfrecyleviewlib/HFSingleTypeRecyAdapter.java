@@ -1,5 +1,6 @@
 package com.igeek.hfrecyleviewlib;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -31,7 +32,7 @@ public abstract class HFSingleTypeRecyAdapter<T,H extends BasicRecyViewHolder> e
 
     @Override
     public BasicRecyViewHolder createViewTypeHolder(ViewGroup parent, int viewType) {
-        return buildViewHolder(View.inflate(parent.getContext(), resId, null));
+        return buildViewHolder(LayoutInflater.from(parent.getContext()).inflate(resId,parent,false));
     }
 
     @Override

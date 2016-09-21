@@ -7,16 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.igeek.hfrecyleviewlib.BasicRecyViewHolder.OnFootViewClickListener;
+import com.igeek.hfrecyleviewlib.BasicRecyViewHolder.OnFootViewLongClickListener;
+import com.igeek.hfrecyleviewlib.BasicRecyViewHolder.OnHeadViewClickListener;
+import com.igeek.hfrecyleviewlib.BasicRecyViewHolder.OnHeadViewLongClickListener;
 import com.igeek.hfrecyleviewlib.BasicRecyViewHolder.OnItemClickListener;
 import com.igeek.hfrecyleviewlib.BasicRecyViewHolder.OnItemLongClickListener;
-import com.igeek.hfrecyleviewlib.BasicRecyViewHolder.OnHeadViewClickListener;
-import com.igeek.hfrecyleviewlib.BasicRecyViewHolder.OnFootViewClickListener;
-import com.igeek.hfrecyleviewlib.BasicRecyViewHolder.OnHeadViewLongClickListener;
-import com.igeek.hfrecyleviewlib.BasicRecyViewHolder.OnFootViewLongClickListener;
 
-
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 含有头部和底部的适配器
