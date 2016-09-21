@@ -12,10 +12,13 @@ import android.widget.Toast;
 import com.igeek.hfrecycleviewtest.R;
 import com.igeek.hfrecyleviewlib.BasicRecyViewHolder;
 import com.igeek.hfrecyleviewlib.HFLineVerComDecoration;
+import com.igeek.hfrecyleviewlib.NestedRefreshLayout;
 import com.igeek.hfrecyleviewlib.RecycleScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import adapter.TestSingleFHFSingleTypeRecyAdapter;
 
@@ -27,6 +30,7 @@ public class HeadFootActivity extends Activity implements
         BasicRecyViewHolder.OnFootViewClickListener {
 
     RecyclerView recyclerView;
+    NestedRefreshLayout refreshLayout;
     TestSingleFHFSingleTypeRecyAdapter adapter;
 
     View loadingView;
@@ -38,6 +42,7 @@ public class HeadFootActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        refreshLayout= (NestedRefreshLayout) findViewById(R.id.refreshLayout);
         recyclerView = (RecyclerView) findViewById(R.id.recycle);
         loadingView = getLayoutInflater().inflate(R.layout.layout_listbottom_loadingview, null);
         nodataView = getLayoutInflater().inflate(R.layout.layout_list_nodata, null);
@@ -73,6 +78,22 @@ public class HeadFootActivity extends Activity implements
         recyclerView.addOnScrollListener(srcollListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter.refreshDatas(buildListByPosition(0));
+        refreshLayout.setOnRefreshListener(new NestedRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                refreshLayout.refreshFinish();
+                            }
+                        });
+                    }
+                },2000);
+            }
+        });
     }
 
     View.OnClickListener headlistener=new  View.OnClickListener(){

@@ -9,26 +9,26 @@ public interface IPullRefreshView {
   /**
    * 刷新中
    */
-  void onPullRefreshing();
+  void onPullRefresh();
 
   /**
    * 提示松手
    */
-  void onPullToRefresh();
+  void onPullFreeHand();
 
   /**
-   * 刷新过程中
+   * 下啦中
    */
-  void releaseToRefresh();
+  void onPullDowning();
 
   /**
    * 刷新完成
    */
-  void onPullRefreshFinished();
+  void onPullFinished();
 
   /**
    * @param pullDistance 下拉的距离
    * @param pullProgress 下拉的距离的比例
    */
-  void pullProgress(float pullDistance, float pullProgress);
+  void onPullProgress(float pullDistance, float pullProgress);
 }

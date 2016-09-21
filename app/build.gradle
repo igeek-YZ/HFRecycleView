@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.igeek.hfrecycleviewtest"
-        minSdkVersion 15
-        targetSdkVersion 22
+        minSdkVersion 14
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }

@@ -70,13 +70,15 @@ public class DeafultRefreshView extends LinearLayout implements IPullRefreshView
 
     @Override
     public void onPullHided() {
+        icon.setVisibility(VISIBLE);
         icon.clearAnimation();
         icon.setImageDrawable(getResources().getDrawable(R.drawable.default_ptr_flip));
         text.setText(R.string.pulling);
     }
 
     @Override
-    public void onPullRefreshing() {
+    public void onPullRefresh() {
+        icon.setVisibility(VISIBLE);
         icon.clearAnimation();
         AnimationDrawable drawable = (AnimationDrawable) getResources().getDrawable(R.drawable.spinner);
         drawable.start();
@@ -85,7 +87,8 @@ public class DeafultRefreshView extends LinearLayout implements IPullRefreshView
     }
 
     @Override
-    public void onPullToRefresh() {
+    public void onPullFreeHand() {
+        icon.setVisibility(VISIBLE);
         icon.clearAnimation();
         if (icon.getAnimation() == null || icon.getAnimation() == mResetRotateAnimation) {
             icon.startAnimation(mRotateAnimation);
@@ -94,20 +97,18 @@ public class DeafultRefreshView extends LinearLayout implements IPullRefreshView
     }
 
     @Override
-    public void releaseToRefresh() {
-        icon.clearAnimation();
-        if (mRotateAnimation == icon.getAnimation()) {
-            icon.startAnimation(mResetRotateAnimation);
-        }
-    }
-
-    @Override
-    public void onPullRefreshFinished() {
+    public void onPullDowning() {
 
     }
 
     @Override
-    public void pullProgress(float pullDistance, float pullProgress) {
+    public void onPullFinished() {
+        icon.setVisibility(GONE);
+        text.setText(R.string.pulling_refreshfinish);
+    }
+
+    @Override
+    public void onPullProgress(float pullDistance, float pullProgress) {
 
     }
 }

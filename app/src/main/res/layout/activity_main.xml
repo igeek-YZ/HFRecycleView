@@ -6,6 +6,8 @@
     android:background="@android:color/white">
 
     <com.igeek.hfrecyleviewlib.NestedRefreshLayout
+        android:id="@+id/refreshLayout"
+        app:pullViewHeight="40dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white" >
