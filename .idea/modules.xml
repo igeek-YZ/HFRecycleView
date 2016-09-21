@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HFRecycleViewTest.iml" filepath="$PROJECT_DIR$/HFRecycleViewTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HFRecycleView.iml" filepath="$PROJECT_DIR$/HFRecycleView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/hfrecyleviewlib/hfrecyleviewlib.iml" filepath="$PROJECT_DIR$/hfrecyleviewlib/hfrecyleviewlib.iml" />
     </modules>

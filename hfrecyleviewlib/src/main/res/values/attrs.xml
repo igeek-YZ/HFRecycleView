@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NestedRefreshLayout">
+        <attr name="pullView" format="integer"/>
+        <attr name="pullViewHeight" format="dimension|reference"/>
+        <attr name="refreshHeight" format="dimension|reference"/>
+        <attr name="animPlayDuration" format="integer"/>
+    </declare-styleable>
+</resources>

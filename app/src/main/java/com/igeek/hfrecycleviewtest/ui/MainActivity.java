@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
     }
 
     public void mulitype(View view){
-        startActivity(new Intent(this,mulitTypeActivity.class));
+//        startActivity(new Intent(this,mulitTypeActivity.class));
     }
 
 }
