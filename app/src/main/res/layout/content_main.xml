@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:gravity="center"
-    android:orientation="vertical"
+<bean.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
-
-    <Button
-        android:onClick="headfoot"
-        android:text="列表(recycleView_linear)"
+    
+    <LinearLayout
+        android:paddingBottom="500dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
-    <Button
-        android:onClick="foot"
-        android:text="列表_仅包含底部(recycleView_linear)"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:onClick="headfoot"
+            android:text="列表(recycleView_linear)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:onClick="grid"
-        android:text="网格(recycleView_grid)"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:onClick="foot"
+            android:text="列表_仅包含底部(recycleView_linear)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:onClick="gridFlow"
-        android:text="瀑布流(recycleView_gridFlow)"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:onClick="grid"
+            android:text="网格(recycleView_grid)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:onClick="mulitype"
-        android:text="多类型视图(recycleView_mulitype)"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:onClick="gridFlow"
+            android:text="瀑布流(recycleView_gridFlow)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-</LinearLayout>
+        <Button
+            android:onClick="mulitype"
+            android:text="多类型视图(recycleView_mulitype)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+</bean.NestedScrollView>

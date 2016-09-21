@@ -21,7 +21,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.orhanobut:logger:1.15'
     compile 'com.android.support:design:23.2.0'
     compile project(path: ':hfrecyleviewlib')
 }
