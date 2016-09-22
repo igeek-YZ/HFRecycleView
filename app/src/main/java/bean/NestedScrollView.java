@@ -266,6 +266,7 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
         scrollBy(0, dyUnconsumed);
         final int myConsumed = getScrollY() - oldScrollY;
         final int myUnconsumed = dyUnconsumed - myConsumed;
+        Logger.i("onNestedScroll --> dyUnconsumed=" + dyUnconsumed + " ; myConsumed=" + myConsumed);
         dispatchNestedScroll(0, myConsumed, 0, myUnconsumed, null);
     }
 
@@ -611,7 +612,7 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
 
         String actionStr=getActionString(action);
 
-        Logger.i("onInterceptTouchEvent \n\nmIsBeingDragged="+mIsBeingDragged+"\naction="+actionStr);
+        Logger.i("mIsBeingDragged="+mIsBeingDragged+"\naction="+actionStr);
 
         switch (action & MotionEventCompat.ACTION_MASK) {
             case MotionEvent.ACTION_MOVE: {
@@ -704,7 +705,7 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
         * drag mode.
         */
 
-        Logger.i("onInterceptTouchEvent \n\nmIsBeingDragged1="+mIsBeingDragged+"\naction2="+actionStr);
+        Logger.i("mIsBeingDragged1="+mIsBeingDragged+"\naction2="+actionStr);
 
         return mIsBeingDragged;
     }
@@ -719,7 +720,7 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
 
         String actionStr=getActionString(actionMasked);
 
-        Logger.i("onInterceptTouchEvent \nmIsBeingDragged="+mIsBeingDragged+"\naction="+actionStr);
+        Logger.i("mIsBeingDragged="+mIsBeingDragged+"\naction="+actionStr);
 
         if (actionMasked == MotionEvent.ACTION_DOWN) {
             mNestedYOffset = 0;
@@ -1511,7 +1512,7 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
         int scrollYDelta = 0;
 
         if (rect.bottom > screenBottom && rect.top > screenTop) {
-            // need to move down to get it in view: move down just enough so
+            // need to checkUpdateScroll down to get it in view: checkUpdateScroll down just enough so
             // that the entire rectangle is in view (or at least the first
             // screen size chunk).
 
@@ -1529,7 +1530,7 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
             scrollYDelta = Math.min(scrollYDelta, distanceToBottom);
 
         } else if (rect.top < screenTop && rect.bottom < screenBottom) {
-            // need to move up to get it in view: move up just enough so that
+            // need to checkUpdateScroll up to get it in view: checkUpdateScroll up just enough so that
             // entire rectangle is in view (or at least the first screen
             // size chunk of it).
 

@@ -3,6 +3,7 @@
     <declare-styleable name="NestedRefreshLayout">
         <attr name="pullView" format="integer"/>
         <attr name="pullViewHeight" format="dimension|reference"/>
+        <attr name="pullMinViewHeight" format="dimension|reference"/>
         <attr name="pullMaxHeight" format="dimension|reference"/>
         <attr name="refreshHeight" format="dimension|reference"/>
         <attr name="animPlayDuration" format="integer"/>
