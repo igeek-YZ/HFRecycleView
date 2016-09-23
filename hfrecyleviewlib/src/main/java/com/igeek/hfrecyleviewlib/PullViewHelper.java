@@ -55,10 +55,6 @@ public class PullViewHelper {
         return mMinScroll;
     }
 
-    public int getCurPosition() {
-        return (int) (pullViewHeight - mScroll);
-    }
-
     public boolean isInTouch() {
         return mIsInTouch;
     }
@@ -85,8 +81,8 @@ public class PullViewHelper {
             }
         }else{
             willTo = mScroll + deltaY * SCROLL_RATIO;
-            final float pullHeight=Math.abs(willTo);
 
+            final float pullHeight=Math.abs(willTo);
             float dragPercent = Math.min(1f, pullHeight / pullViewHeight);
             float tensionSlingshotPercent = Math.max(0, Math.min(pullHeight - pullViewHeight,pullMaxHegiht-pullViewHeight) / pullViewHeight);
             float tensionPercent = (float) ((tensionSlingshotPercent / 4) -Math.pow((tensionSlingshotPercent / 4), 2)) * 2f;
@@ -96,33 +92,24 @@ public class PullViewHelper {
             if(willTo>mScroll) willTo=mScroll;
 
             consumed=willTo-mScroll;
-
-//            Logger.i("willTo=" + willTo+"\nmScroll="+mScroll+"\nconsumed="+consumed);
-
         }
-
         mScroll = willTo;
-
         return (int) consumed;
     }
 
-    public boolean isOverHeight() {
-        return mScroll < 0;
-    }
-
-    public float getMovePercentage() {
+    public float getScrollPercent() {
         return -mScroll / pullMaxHegiht;
     }
 
-    public boolean canSendRefresh() {
-        return getMovePercentage() > refreshPercentage;
-    }
-
-    public float getRefreshPercentage() {
-        return refreshPercentage;
+    public boolean canTouchUpToRefresh() {
+        return getScrollPercent() > refreshPercentage;
     }
 
     public int getPullRefreshHeight() {
         return pullRefreshHeight;
+    }
+
+    public void setScroll(float mScroll) {
+        this.mScroll = mScroll;
     }
 }

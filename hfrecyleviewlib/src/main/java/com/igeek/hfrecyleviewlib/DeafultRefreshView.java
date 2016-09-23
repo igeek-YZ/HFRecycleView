@@ -98,7 +98,10 @@ public class DeafultRefreshView extends LinearLayout implements IPullRefreshView
 
     @Override
     public void onPullDowning() {
-
+        icon.setVisibility(VISIBLE);
+        icon.clearAnimation();
+        icon.setImageDrawable(getResources().getDrawable(R.drawable.default_ptr_flip));
+        text.setText(R.string.pulling);
     }
 
     @Override

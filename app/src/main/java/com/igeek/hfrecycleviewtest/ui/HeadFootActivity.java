@@ -17,6 +17,8 @@ import com.igeek.hfrecyleviewlib.RecycleScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import adapter.TestSingleFHFSingleTypeRecyAdapter;
 
@@ -76,22 +78,27 @@ public class HeadFootActivity extends Activity implements
         recyclerView.addOnScrollListener(srcollListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter.refreshDatas(buildListByPosition(0));
-//        refreshLayout.setOnRefreshListener(new NestedRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                new Timer().schedule(new TimerTask() {
-//                    @Override
-//                    public void run() {
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                refreshLayout.refreshFinish();
-//                            }
-//                        });
-//                    }
-//                },2000);
-//            }
-//        });
+        refreshLayout.setOnRefreshListener(new NestedRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshFinish();
+//                Toast.makeText(HeadFootActivity.this,"onRefresh",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void refreshFinish(){
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.refreshFinish();
+                    }
+                });
+            }
+        },2000);
     }
 
     View.OnClickListener headlistener=new  View.OnClickListener(){
