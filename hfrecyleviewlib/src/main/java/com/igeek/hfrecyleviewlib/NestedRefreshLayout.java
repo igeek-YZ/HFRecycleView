@@ -298,7 +298,8 @@ public class NestedRefreshLayout extends ViewGroup
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 mLastMotionY = (int) ev.getY();
-                mIsBeingDragged = false;
+                mScroller.computeScrollOffset();
+                mIsBeingDragged = !mScroller.isFinished();
                 mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
                 startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL);
                 break;
