@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_ffffff"
+    android:padding="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_stroke_gray"
+        android:orientation="vertical"
+        android:paddingBottom="8dp">
+
+        <!-- 比例：204/345 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <widgets.AspectRatioImageView
+                android:id="@+id/rmTypeView7_coverImg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                app:aspectRatio="0.5913"
+                android:src="@mipmap/ic_grid_img" />
+            
+            <View
+                android:layout_marginTop="-40dp"
+                android:layout_below="@id/rmTypeView7_coverImg"
+                android:background="@mipmap/ic_shadow_recom"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_marginTop="-32dp"
+                android:layout_below="@id/rmTypeView7_coverImg"
+                android:id="@+id/rmTypeView7_hotNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp"
+                android:text="12000 万"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_marginTop="-32dp"
+                android:layout_below="@id/rmTypeView7_coverImg"
+                android:id="@+id/rmTypeView7_hotIcon"
+                android:layout_width="16dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="2dp"
+                android:layout_toLeftOf="@id/rmTypeView7_hotNumber"
+                android:src="@mipmap/ic_star_white" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/rmTypeView7_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="书本名"
+            android:textColor="@color/gray_333333"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/rmTypeView7_subTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="更新到25话"
+            android:textColor="@color/gray_929292"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -8,9 +8,6 @@ import android.view.View;
 
 import com.igeek.hfrecyleviewlib.utils.DensityUtils;
 
-
-/**
- */
 public class HFLineHerComDecoration extends RecyclerView.ItemDecoration {
 
     private int mHeight;

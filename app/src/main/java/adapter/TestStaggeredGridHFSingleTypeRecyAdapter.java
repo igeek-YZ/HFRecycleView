@@ -8,7 +8,7 @@ import com.igeek.hfrecycleviewtest.R;
 import com.igeek.hfrecyleviewlib.BasicRecyViewHolder;
 import com.igeek.hfrecyleviewlib.HFSingleTypeRecyAdapter;
 
-import bean.RandomEntity;
+import entitys.RandomEntity;
 
 /**
  * 测试

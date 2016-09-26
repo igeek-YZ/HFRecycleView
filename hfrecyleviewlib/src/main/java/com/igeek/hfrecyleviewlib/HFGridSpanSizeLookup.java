@@ -2,9 +2,6 @@ package com.igeek.hfrecyleviewlib;
 
 import android.support.v7.widget.GridLayoutManager;
 
-/**
- * Created by User on 16/7/1.
- */
 public class HFGridSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
 
     private GridLayoutManager layoutManager;

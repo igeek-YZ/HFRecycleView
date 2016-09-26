@@ -9,17 +9,12 @@ import android.view.View;
 
 import com.igeek.hfrecyleviewlib.utils.DensityUtils;
 
-
-/**
- *
- */
 public class HFStageredGridVerDecoration extends RecyclerView.ItemDecoration {
 
     private int gapSize;
 
     public HFStageredGridVerDecoration(int gapSizedp) {
         this.gapSize = DensityUtils.dp2px(gapSizedp);
-
     }
 
     @Override

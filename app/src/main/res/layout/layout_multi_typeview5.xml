@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp">
+
+    <!-- 比例：288/710 -->
+    <widgets.AspectRatioImageView
+        android:id="@+id/rmTypeView5_bigCoverImg"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:scaleType="fitXY"
+        app:aspectRatio="0.4056"
+        android:src="@mipmap/ic_type5_topimg" />
+
+    <LinearLayout
+        android:id="@+id/rmTypeView5_coverImgs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rmTypeView5_bigCoverImg"
+        android:layout_marginTop="8dp"
+        android:divider="@drawable/shape_gap_white_8dp"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <!-- 比例：298/223 -->
+        <widgets.AspectRatioImageView
+            android:id="@+id/rmTypeView5_smailCoverImg1"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            app:aspectRatio="1.3363"
+            android:src="@mipmap/ic_type5_img" />
+
+        <widgets.AspectRatioImageView
+            android:id="@+id/rmTypeView5_smailCoverImg2"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            app:aspectRatio="1.3363"
+            android:src="@mipmap/ic_type5_img" />
+
+        <widgets.AspectRatioImageView
+            android:id="@+id/rmTypeView5_smailCoverImg3"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            app:aspectRatio="1.3363"
+            android:src="@mipmap/ic_type5_img" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rmTypeView5_coverImgs"
+        android:layout_marginTop="8dp"
+        android:divider="@drawable/shape_gap_white_8dp"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@+id/rmTypeView5_bookName1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="书本名"
+            android:textColor="@color/gray_333333"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/rmTypeView5_bookName2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="书本名"
+            android:textColor="@color/gray_333333"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/rmTypeView5_bookName3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="书本名"
+            android:textColor="@color/gray_333333"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</RelativeLayout>

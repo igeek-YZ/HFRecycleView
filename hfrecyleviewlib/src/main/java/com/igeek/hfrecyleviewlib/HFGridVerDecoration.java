@@ -9,10 +9,6 @@ import android.view.View;
 
 import com.igeek.hfrecyleviewlib.utils.DensityUtils;
 
-
-/**
- *
- */
 public class HFGridVerDecoration extends RecyclerView.ItemDecoration {
 
     private int gapSize;

@@ -34,6 +34,10 @@
             android:name=".ui.GridFlowAcitvity"
             android:label="@string/title_activity_grid_flow_acitvity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.MultiTypeActivity"
+            android:label="@string/title_activity_multi_type"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

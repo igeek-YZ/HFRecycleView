@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="112dp"
+    android:background="@color/gray_ffffff">
+
+    <ImageView
+        android:id="@+id/typeData6_item_coverImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_grid_img" />
+
+</RelativeLayout>

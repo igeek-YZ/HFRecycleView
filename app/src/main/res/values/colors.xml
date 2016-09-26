@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="halfWhite">#55ffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000</color>
+    <color name="gray_929292">#929292</color>
+    <color name="gray_999999">#999999</color>
+    <color name="gray_333333">#333333</color>
+    <color name="gray_E7370C">#E7370C</color>
+    <color name="gray_ffffff">#ffffff</color>
+    <color name="gray_66929292">#66929292</color>
+    <color name="gray_f4f4f4">#f4f4f4</color>
+    <color name="gray_cccccc">#cccccc</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>

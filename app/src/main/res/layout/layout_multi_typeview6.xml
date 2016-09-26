@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widgets.AspectRatioRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@color/gray_ffffff"
+    android:paddingBottom="8dp">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rmTypeView6_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/halfWhite"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
+
+</widgets.AspectRatioRelativeLayout>

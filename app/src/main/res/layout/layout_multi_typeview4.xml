@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_ffffff"
+    android:padding="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_stroke_gray"
+        android:orientation="vertical">
+
+        <!-- 比例：202/344 -->
+        <widgets.AspectRatioImageView
+            android:id="@+id/rmTypeView4_coverImg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            app:aspectRatio="0.5872"
+            android:src="@mipmap/ic_grid_img" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/rmTypeView4_bookName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="书本名"
+                android:textColor="@color/gray_333333"
+                android:textSize="16sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
+                <TextView
+                    android:id="@+id/rmTypeView4_hotNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="2dp"
+                    android:text="12000 万"
+                    android:textColor="@color/gray_929292"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/rmTypeView4_hotIcon"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/rmTypeView4_hotNumber"
+                    android:src="@mipmap/ic_smail_fire_gray" />
+
+                <TextView
+                    android:id="@+id/rmTypeView4_newstChapterTip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/rmTypeView4_hotIcon"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="更新到25话"
+                    android:textColor="@color/gray_929292"
+                    android:textSize="12sp" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

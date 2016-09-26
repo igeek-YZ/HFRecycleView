@@ -13,10 +13,13 @@ import android.widget.Toast;
 import com.igeek.hfrecycleviewtest.R;
 import com.igeek.hfrecyleviewlib.BasicRecyViewHolder;
 import com.igeek.hfrecyleviewlib.HFLineVerComDecoration;
+import com.igeek.hfrecyleviewlib.NestedRefreshLayout;
 import com.igeek.hfrecyleviewlib.RecycleScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import adapter.TestSingleFHFSingleTypeRecyAdapter;
 
@@ -25,6 +28,7 @@ public class FootActivity extends Activity implements
         BasicRecyViewHolder.OnItemLongClickListener{
 
     RecyclerView recyclerView;
+    NestedRefreshLayout refreshLayout;
     TestSingleFHFSingleTypeRecyAdapter adapter;
 
     View loadingView;
@@ -35,6 +39,7 @@ public class FootActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        refreshLayout= (NestedRefreshLayout) findViewById(R.id.refreshLayout);
         recyclerView = (RecyclerView) findViewById(R.id.recycle);
         loadingView = getLayoutInflater().inflate(R.layout.layout_listbottom_loadingview, null);
         nodataView = getLayoutInflater().inflate(R.layout.layout_list_nodata, null);
@@ -56,7 +61,28 @@ public class FootActivity extends Activity implements
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter.refreshDatas(buildListByPosition(0));
+        refreshLayout.setOnRefreshListener(new NestedRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshFinish();
+            }
+        });
     }
+
+    public void refreshFinish(){
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.refreshFinish();
+                    }
+                });
+            }
+        },1500);
+    }
+
     @Override
     public void OnItemClick(View v, int adapterPosition) {
         //adapterPosition 的位置不一定是数据集当中的位置 获取真实的位置通过  adapter.getPositon(adapterPosition) 获得

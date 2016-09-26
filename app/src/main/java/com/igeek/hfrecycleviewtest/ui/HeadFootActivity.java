@@ -98,7 +98,7 @@ public class HeadFootActivity extends Activity implements
                     }
                 });
             }
-        },4000);
+        },1500);
     }
 
     View.OnClickListener headlistener=new  View.OnClickListener(){

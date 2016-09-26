@@ -11,14 +11,17 @@ import android.widget.Toast;
 import com.igeek.hfrecycleviewtest.R;
 import com.igeek.hfrecyleviewlib.BasicRecyViewHolder;
 import com.igeek.hfrecyleviewlib.HFStageredGridVerDecoration;
+import com.igeek.hfrecyleviewlib.NestedRefreshLayout;
 import com.igeek.hfrecyleviewlib.RecycleScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import adapter.TestStaggeredGridHFSingleTypeRecyAdapter;
-import bean.RandomEntity;
+import entitys.RandomEntity;
 
 
 public class GridFlowAcitvity extends Activity implements
@@ -28,6 +31,7 @@ public class GridFlowAcitvity extends Activity implements
         BasicRecyViewHolder.OnFootViewClickListener {
 
     RecyclerView recyclerView;
+    NestedRefreshLayout refreshLayout;
     TestStaggeredGridHFSingleTypeRecyAdapter adapter;
 
     View loadingView;
@@ -38,6 +42,7 @@ public class GridFlowAcitvity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        refreshLayout= (NestedRefreshLayout) findViewById(R.id.refreshLayout);
         recyclerView = (RecyclerView) findViewById(R.id.recycle);
         loadingView = getLayoutInflater().inflate(R.layout.layout_listbottom_loadingview, null);
         nodataView = getLayoutInflater().inflate(R.layout.layout_list_nodata, null);
@@ -62,6 +67,26 @@ public class GridFlowAcitvity extends Activity implements
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.addOnScrollListener(srcollListener);
         handler.sendEmptyMessageDelayed(0, 1000);
+        refreshLayout.setOnRefreshListener(new NestedRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshFinish();
+            }
+        });
+    }
+
+    public void refreshFinish(){
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.refreshFinish();
+                    }
+                });
+            }
+        },1500);
     }
 
     @Override
