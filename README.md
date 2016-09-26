@@ -9,17 +9,20 @@
 ###xml文件
 
 	<?xml version="1.0" encoding="utf-8"?>
-	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    	android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-    	android:background="@android:color/white">
-
-    	<android.support.v7.widget.RecyclerView
-        	android:id="@+id/recycle"
-        	android:layout_width="match_parent"
-        	android:layout_height="match_parent" />
-
-	</RelativeLayout>
+	<com.igeek.hfrecyleviewlib.NestedRefreshLayout
+            android:id="@+id/refreshLayout"
+            app:pullViewHeight="60dp"
+            app:pullMaxHeight="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" >
+    
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+    
+    </com.igeek.hfrecyleviewlib.NestedRefreshLayout>
 
 ###部分代码
 	
@@ -30,6 +33,7 @@
         BasicRecyViewHolder.OnFootViewClickListener {
 
     	RecyclerView recyclerView;
+    	NestedRefreshLayout refreshLayout;
     	TestSingleFHFSingleTypeRecyAdapter adapter;
 
     	View loadingView;
@@ -41,6 +45,7 @@
     	protected void onCreate(Bundle savedInstanceState) {
         	super.onCreate(savedInstanceState);
         	setContentView(R.layout.activity_main);
+        	refreshLayout= (NestedRefreshLayout) findViewById(R.id.refreshLayout);
         	recyclerView = (RecyclerView) findViewById(R.id.recycle);
         	loadingView = getLayoutInflater().inflate(R.layout.layout_listbottom_loadingview, null);
         	nodataView = getLayoutInflater().inflate(R.layout.layout_list_nodata, null);
@@ -76,6 +81,13 @@
         	recyclerView.addOnScrollListener(srcollListener);
         	recyclerView.setLayoutManager(new LinearLayoutManager(this));
         	adapter.refreshDatas(buildListByPosition(0));
+        	refreshLayout.setOnRefreshListener(new NestedRefreshLayout.OnRefreshListener() {
+                 @Override
+                 public void onRefresh() {
+                    //1:send network request data 
+                    //2:refreshLayout.refreshFinish(); 
+                 }
+            });
     	}
 	}
 
