@@ -335,7 +335,6 @@ public class NestedRefreshLayout extends ViewGroup
                 /* Release the drag */
                 mIsBeingDragged = false;
                 mActivePointerId = INVALID_POINTER;
-                checkSpringBack();
                 stopNestedScroll();
                 break;
             default:
@@ -343,6 +342,15 @@ public class NestedRefreshLayout extends ViewGroup
         }
 
         return mIsBeingDragged;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        final int actionMasked = MotionEventCompat.getActionMasked(ev);
+        if(actionMasked == MotionEvent.ACTION_UP||actionMasked == MotionEvent.ACTION_CANCEL){
+            checkSpringBack();
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override
@@ -429,7 +437,6 @@ public class NestedRefreshLayout extends ViewGroup
             case MotionEvent.ACTION_CANCEL: {
                 mIsBeingDragged = false;
                 mActivePointerId = INVALID_POINTER;
-                checkSpringBack();
                 stopNestedScroll();
             }
             default:
@@ -545,6 +552,7 @@ public class NestedRefreshLayout extends ViewGroup
      * @param velocityY Y轴方向上的速率. 负值标识用户向下的快速滑动
      */
     public void fling(int velocityY) {
+        Logger.i("velocityY="+velocityY);
         mScroller.abortAnimation();
         mScroller.fling(0, pullHelper.getScroll(), 0, velocityY, 0, 0,
                 pullHelper.getMinScroll(), pullHelper.getMaxScroll(),

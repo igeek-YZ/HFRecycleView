@@ -1,4 +1,4 @@
-package bean;
+package nested;
 
 import android.content.Context;
 import android.content.res.TypedArray;

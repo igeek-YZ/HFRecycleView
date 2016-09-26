@@ -82,14 +82,14 @@ public class PullViewHelper {
         }else{
             willTo = mScroll + deltaY * SCROLL_RATIO;
 
-            final float pullHeight=Math.abs(willTo);
-            float dragPercent = Math.min(1f, pullHeight / pullViewHeight);
-            float tensionSlingshotPercent = Math.max(0, Math.min(pullHeight - pullViewHeight,pullMaxHegiht-pullViewHeight) / pullViewHeight);
-            float tensionPercent = (float) ((tensionSlingshotPercent / 4) -Math.pow((tensionSlingshotPercent / 4), 2)) * 2f;
-            float extraMove = (pullViewHeight) * tensionPercent * 2;
-            willTo = -((pullViewHeight * dragPercent) + extraMove);
+//            final float pullHeight=Math.abs(willTo);
+//            float dragPercent = Math.min(1f, pullHeight / pullViewHeight);
+//            float tensionSlingshotPercent = Math.max(0, Math.min(pullHeight - pullViewHeight,pullMaxHegiht-pullViewHeight) / pullViewHeight);
+//            float tensionPercent = (float) ((tensionSlingshotPercent / 4) -Math.pow((tensionSlingshotPercent / 4), 2)) * 2f;
+//            float extraMove = (pullViewHeight) * tensionPercent * 2;
+//            willTo = -((pullViewHeight * dragPercent) + extraMove);
 
-            if(willTo>mScroll) willTo=mScroll;
+            if(willTo<mMinScroll) willTo=mMinScroll;
 
             consumed=willTo-mScroll;
         }
