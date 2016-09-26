@@ -4,7 +4,9 @@
 
 #### 效果图 
 
-<img src="https://github.com/igeek-YZ/HFRecycleView/blob/master/pics/hfrecycleview.gif" width = "338" height = "554" alt="554" align=center />
+<img src="https://github.com/igeek-YZ/HFRecycleView/blob/master/pics/hfrecycleview4.gif" width = "336" height = "548" alt="554" align=center />
+
+<img src="https://github.com/igeek-YZ/HFRecycleView/blob/master/pics/hfrecycleview_lib.png" width = "347" height = "392" alt="554" align=center />
 
 ###xml文件
 
