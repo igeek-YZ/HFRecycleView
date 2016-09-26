@@ -218,8 +218,7 @@ public class NestedRefreshLayout extends ViewGroup
     @Override
     public boolean onNestedFling(View target, float velocityX, float velocityY, boolean consumed) {
         if(!consumed){
-            flingWithNestedDispatch((int) velocityY);
-            return true;
+            return flingWithNestedDispatch((int) velocityY);
         }
         return false;
     }
@@ -516,7 +515,7 @@ public class NestedRefreshLayout extends ViewGroup
     //根据手指快速滑动时候的速率滚动视图
     private boolean flingWithNestedDispatch(int velocityY) {
         final boolean canFling = (pullHelper.canScrollUp() && velocityY > 0) ||
-                (pullHelper.canScrollDown() && velocityY < 0);
+                (pullHelper.canScrollDown() && velocityY < 0 && (!ViewCompat.canScrollVertically(nestedTarget,-1)));
         if (!dispatchNestedPreFling(0, velocityY)) {
             dispatchNestedFling(0, velocityY, canFling);
             if (canFling) {
@@ -528,12 +527,16 @@ public class NestedRefreshLayout extends ViewGroup
 
     @Override
     public void computeScroll() {
-//        if (mScroller.computeScrollOffset()) {
-//            scrollTo(getScrollX(),mScroller.getCurrY());
-//            ViewCompat.postInvalidateOnAnimation(this);
-//        } else {
-//            checkSpringBack();
-//        }
+        if (mScroller.computeScrollOffset()) {
+            int oldX = getScrollX();
+            int oldY = getScrollY();
+            int x = mScroller.getCurrX();
+            int y = mScroller.getCurrY();
+            if (oldX != x || oldY != y) {
+                scrollMoveOffset(y-oldY);
+                ViewCompat.postInvalidateOnAnimation(this);
+            }
+        }
     }
 
     /**
