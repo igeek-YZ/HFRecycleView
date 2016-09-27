@@ -186,8 +186,6 @@ public class NestedRefreshLayout extends ViewGroup
 
         final boolean canScrollUp= pullHelper.canScrollUp();
 
-//        Logger.i("dy=" + dy + "\ncanScrollUp=" + canScrollUp);
-
         if(dy>0&&canScrollUp){
             consumed[1] = scrollMoveOffset(dy);
         }
@@ -202,9 +200,6 @@ public class NestedRefreshLayout extends ViewGroup
     @Override
     public void onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed,
                                int dyUnconsumed) {
-
-//        Logger.i("dyConsumed=" + dyConsumed + "\ndyUnconsumed=" + dyUnconsumed);
-
         final int myConsumed = scrollMoveOffset(dyUnconsumed);
         final int myUnconsumed = dyUnconsumed - myConsumed;
         dispatchNestedScroll(dxConsumed, myConsumed, dxUnconsumed, myUnconsumed, null);
@@ -289,8 +284,6 @@ public class NestedRefreshLayout extends ViewGroup
 
         final int action = MotionEventCompat.getActionMasked(ev);
 
-//        Logger.i("mIsBeingDragged=" + mIsBeingDragged + "\naction=" + getActionString(action));
-
         if ((action == MotionEvent.ACTION_MOVE) && (mIsBeingDragged)) {
             return true;
         }
@@ -359,8 +352,6 @@ public class NestedRefreshLayout extends ViewGroup
         MotionEvent vtev = MotionEvent.obtain(ev);
 
         final int actionMasked = MotionEventCompat.getActionMasked(ev);
-
-//        Logger.i("mIsBeingDragged=" + mIsBeingDragged + "\naction=" + getActionString(actionMasked));
 
         if (actionMasked == MotionEvent.ACTION_DOWN) {
             mNestedYOffset = 0;
@@ -552,7 +543,6 @@ public class NestedRefreshLayout extends ViewGroup
      * @param velocityY Y轴方向上的速率. 负值标识用户向下的快速滑动
      */
     public void fling(int velocityY) {
-        Logger.i("velocityY="+velocityY);
         mScroller.abortAnimation();
         mScroller.fling(0, pullHelper.getScroll(), 0, velocityY, 0, 0,
                 pullHelper.getMinScroll(), pullHelper.getMaxScroll(),
@@ -641,27 +631,6 @@ public class NestedRefreshLayout extends ViewGroup
         void onRefresh();
     }
 
-
-    public String getActionString(int action) {
-
-        switch (action) {
-            case MotionEvent.ACTION_DOWN:
-                return "ACTION_DOWN";
-
-            case MotionEvent.ACTION_MOVE:
-                return "ACTION_MOVE";
-
-            case MotionEvent.ACTION_UP:
-                return "ACTION_UP";
-
-            case MotionEvent.ACTION_POINTER_UP:
-                return "ACTION_POINTER_UP";
-            default:
-                return "";
-
-        }
-    }
-
     private final Animation.AnimationListener refreshingListener = new Animation.AnimationListener() {
 
 
@@ -692,8 +661,10 @@ public class NestedRefreshLayout extends ViewGroup
         }
         @Override
         public void onAnimationEnd(Animation animation) {
-            pullState = IPullRefreshView.State.GONE;
-            pullRefreshView.onPullHided();
+            if(pullHelper.getScroll()==0){
+                pullState = IPullRefreshView.State.GONE;
+                pullRefreshView.onPullHided();
+            }
         }
     };
 
