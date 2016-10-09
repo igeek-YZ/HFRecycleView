@@ -10,6 +10,7 @@ import android.support.v4.view.NestedScrollingParentHelper;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ScrollerCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,11 +22,10 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.Transformation;
 
-import com.orhanobut.logger.Logger;
-
 public class NestedRefreshLayout extends ViewGroup
         implements NestedScrollingParent, NestedScrollingChild {
 
+    private static final String TAG=NestedRefreshLayout.class.getSimpleName();
     private static final int INVALID_POINTER = -1;
     private int mActivePointerId = INVALID_POINTER;
 
@@ -449,12 +449,7 @@ public class NestedRefreshLayout extends ViewGroup
         final int scrollY = pullHelper.getScroll();
         final int delta = scrollY - oldScrollY;
 
-//        Logger.i("deltaY=" + deltaY+"\ngetScroll()="+getScrollY() + "\noldScrollY=" + oldScrollY +"\nScrollY=" + scrollY+
-//                "\nconsumed="+consumed+"\ndelta="+delta +
-//                "\nrefreshHeight="+pullHelper.getPullRefreshHeight()+"\npullMaxHegiht="+pullHelper.getMaxHeight());
-
-
-        if (pullState!= IPullRefreshView.State.MOVE_REFRESH ) {
+        if (pullState!= IPullRefreshView.State.MOVE_REFRESH ||pullState!= IPullRefreshView.State.MOVE_FINISH_REFRESH) {
             if (pullHelper.canTouchUpToRefresh()) {
                 if(pullState!= IPullRefreshView.State.MOVE_WAIT_REFRESH){
                     pullState = IPullRefreshView.State.MOVE_WAIT_REFRESH;
@@ -467,6 +462,10 @@ public class NestedRefreshLayout extends ViewGroup
                 }
             }
         }
+
+        Log.i(TAG,"deltaY=" + deltaY+"\ngetScroll()="+getScrollY() + "\noldScrollY=" + oldScrollY +"\nScrollY=" + scrollY+
+                "\nconsumed="+consumed+"\ndelta="+delta +
+                "\nrefreshHeight="+pullHelper.getPullRefreshHeight()+"\npullMaxHegiht="+pullHelper.getMaxHeight());
 
 
         if(delta!=0)
@@ -485,7 +484,7 @@ public class NestedRefreshLayout extends ViewGroup
 
     //手离开屏幕后检查和更新状态
     private synchronized void checkSpringBack() {
-        Logger.i("pullState="+pullState.toString()+" canTouchUpToRefresh="+pullHelper.canTouchUpToRefresh());
+        Log.i(TAG,"pullState="+pullState.toString()+" canTouchUpToRefresh="+pullHelper.canTouchUpToRefresh());
         if(pullState== IPullRefreshView.State.MOVE_REFRESH){
             if(pullHelper.canTouchUpToRefresh())
                 animToRefreshPosition(pullHelper.getScroll(), null);
@@ -507,6 +506,7 @@ public class NestedRefreshLayout extends ViewGroup
             pullState= IPullRefreshView.State.MOVE_REFRESH;
             animToRefreshPosition(scrollY, refreshingListener);
         } else {
+            pullState= IPullRefreshView.State.MOVE_FINISH_REFRESH;
             animToStartPosition(scrollY, resetListener, delay);
         }
     }

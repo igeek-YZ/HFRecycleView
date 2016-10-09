@@ -3,7 +3,7 @@ package com.igeek.hfrecyleviewlib;
 public interface IPullRefreshView {
 
   enum State{
-    GONE,MOVE_PULL,MOVE_WAIT_REFRESH,MOVE_REFRESH,MOVE_SRPINGBACK;
+    GONE,MOVE_PULL,MOVE_WAIT_REFRESH,MOVE_REFRESH,MOVE_FINISH_REFRESH,MOVE_SRPINGBACK;
   }
 
   /**
