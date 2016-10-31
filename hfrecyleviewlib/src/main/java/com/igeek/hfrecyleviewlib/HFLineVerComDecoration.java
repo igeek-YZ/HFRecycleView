@@ -18,6 +18,7 @@ public class HFLineVerComDecoration extends RecyclerView.ItemDecoration{
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(mHeight);
+        mPaint.setAntiAlias(true);
         mPaint.setColor(color);
     }
 
