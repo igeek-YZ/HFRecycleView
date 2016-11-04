@@ -97,9 +97,10 @@ public class NestedRefreshLayout extends ViewGroup
             @Override
             public void applyTransformationTop(int targetTop) {
                 final int oldScroll=pullHelper.getScroll();
-                final int offsetY=targetTop - oldScroll;
                 pullHelper.setScroll(targetTop);
-                scrollTargetOffset(offsetY);
+                final int offsetY=targetTop - oldScroll;
+                if(offsetY!=0)
+                    scrollTargetOffset(offsetY);
             }
         };
 
@@ -449,23 +450,27 @@ public class NestedRefreshLayout extends ViewGroup
         final int scrollY = pullHelper.getScroll();
         final int delta = scrollY - oldScrollY;
 
-        if (pullState!= IPullRefreshView.State.MOVE_REFRESH ||pullState!= IPullRefreshView.State.MOVE_FINISH_REFRESH) {
-            if (pullHelper.canTouchUpToRefresh()) {
-                if(pullState!= IPullRefreshView.State.MOVE_WAIT_REFRESH){
-                    pullState = IPullRefreshView.State.MOVE_WAIT_REFRESH;
-                    pullRefreshView.onPullFreeHand();
-                }
-            } else {
-                if(pullState!= IPullRefreshView.State.MOVE_PULL){
-                    pullState = IPullRefreshView.State.MOVE_PULL;
-                    pullRefreshView.onPullDowning();
+        if(pullState == IPullRefreshView.State.MOVE_REFRESH){
+            //待定处理
+        }else{
+            if (pullState!= IPullRefreshView.State.MOVE_REFRESH) {
+                if (pullHelper.canTouchUpToRefresh()) {
+                    if(pullState!= IPullRefreshView.State.MOVE_WAIT_REFRESH){
+                        pullState = IPullRefreshView.State.MOVE_WAIT_REFRESH;
+                        pullRefreshView.onPullFreeHand();
+                    }
+                } else {
+                    if(pullState!= IPullRefreshView.State.MOVE_PULL){
+                        pullState = IPullRefreshView.State.MOVE_PULL;
+                        pullRefreshView.onPullDowning();
+                    }
                 }
             }
         }
 
-        Log.i(TAG,"deltaY=" + deltaY+"\ngetScroll()="+getScrollY() + "\noldScrollY=" + oldScrollY +"\nScrollY=" + scrollY+
-                "\nconsumed="+consumed+"\ndelta="+delta +
-                "\nrefreshHeight="+pullHelper.getPullRefreshHeight()+"\npullMaxHegiht="+pullHelper.getMaxHeight());
+//        Log.i(TAG,"deltaY=" + deltaY+"\ngetScroll()="+getScrollY() + "\noldScrollY=" + oldScrollY +"\nScrollY=" + scrollY+
+//                "\nconsumed="+consumed+"\ndelta="+delta +
+//                "\nrefreshHeight="+pullHelper.getPullRefreshHeight()+"\npullMaxHegiht="+pullHelper.getMaxHeight());
 
 
         if(delta!=0)
@@ -482,16 +487,28 @@ public class NestedRefreshLayout extends ViewGroup
         pullRefreshView.onPullProgress(pullHelper.getScroll(),pullHelper.getScrollPercent());
     }
 
+    //【刷新完成】后执行【回滚隐藏动画】
+    public void refreshFinish() {
+        refreshDelayFinish(1000);
+    }
+
+    //【刷新完成】后延迟指定时间执行【回滚隐藏动画】
+    public void refreshDelayFinish(int delayTime) {
+        if (pullRefreshView != null) {
+            pullRefreshView.onPullFinished();
+            froceRefreshToState(false, delayTime);
+        }
+    }
+
     //手离开屏幕后检查和更新状态
     private synchronized void checkSpringBack() {
-        Log.i(TAG,"pullState="+pullState.toString()+" canTouchUpToRefresh="+pullHelper.canTouchUpToRefresh());
+        Log.i(TAG,"checkSpringBack ->pullState="+pullState.toString()+" canTouchUpToRefresh="+pullHelper.canTouchUpToRefresh());
         if(pullState== IPullRefreshView.State.MOVE_REFRESH){
             if(pullHelper.canTouchUpToRefresh())
-                animToRefreshPosition(pullHelper.getScroll(), null);
+                animToRefreshPosition(pullHelper.getScroll(), null,0);
         }else{
             froceRefreshToState(pullHelper.canTouchUpToRefresh()&&pullState!= IPullRefreshView.State.MOVE_SRPINGBACK);
         }
-
     }
 
     //更新视图至指定刷新状态
@@ -504,11 +521,30 @@ public class NestedRefreshLayout extends ViewGroup
         final int scrollY=pullHelper.getScroll();
         if (refresh) {
             pullState= IPullRefreshView.State.MOVE_REFRESH;
-            animToRefreshPosition(scrollY, refreshingListener);
+            animToRefreshPosition(scrollY, refreshingListener,0);
         } else {
-            pullState= IPullRefreshView.State.MOVE_FINISH_REFRESH;
-            animToStartPosition(scrollY, resetListener, delay);
+            postDelayed(delayAnimToStartPosTask,delay);
         }
+    }
+
+    private void animToStartPosition(int from,Animation.AnimationListener listener, long delay) {
+        animToPostion(from,0,delay,listener);
+    }
+
+    private void animToRefreshPosition(int from, Animation.AnimationListener listener, long delay) {
+        animToPostion(from,-pullHelper.getPullRefreshHeight(),delay,listener);
+    }
+
+    public void animToPostion(int from,int to,long delayTime,Animation.AnimationListener listener){
+        animation.reset();
+        animation.setFrom(from);
+        animation.setTo(to);
+        animation.setStartOffset(delayTime);
+        animation.setDuration(animDuration);
+        animation.setInterpolator(mInterpolator);
+        animation.setAnimationListener(listener);
+        clearAnimation();
+        startAnimation(animation);
     }
 
     //根据手指快速滑动时候的速率滚动视图
@@ -548,39 +584,6 @@ public class NestedRefreshLayout extends ViewGroup
                 pullHelper.getMinScroll(), pullHelper.getMaxScroll(),
                 0, 0);
         ViewCompat.postInvalidateOnAnimation(this);
-    }
-
-    //【刷新完成】后延迟指定时间执行【回滚隐藏动画】
-    public void refreshDelayFinish(int delayTime) {
-        if (pullRefreshView != null) {
-            pullRefreshView.onPullFinished();
-            froceRefreshToState(false, delayTime);
-        }
-    }
-
-    //【刷新完成】后执行【回滚隐藏动画】
-    public void refreshFinish() {
-        refreshDelayFinish(1000);
-    }
-
-    private void animToStartPosition(int from,Animation.AnimationListener listener, long delay) {
-        animToPostion(from,0,delay,listener);
-    }
-
-    private void animToRefreshPosition(int from, Animation.AnimationListener listener) {
-        animToPostion(from,-pullHelper.getPullRefreshHeight(),0,listener);
-    }
-
-    public void animToPostion(int from,int to,long delayTime,Animation.AnimationListener listener){
-        animation.reset();
-        animation.setFrom(from);
-        animation.setTo(to);
-        animation.setStartOffset(delayTime);
-        animation.setDuration(animDuration);
-        animation.setInterpolator(mInterpolator);
-        animation.setAnimationListener(listener);
-        clearAnimation();
-        startAnimation(animation);
     }
 
     //多个手指触摸屏幕状态的变更
@@ -627,10 +630,6 @@ public class NestedRefreshLayout extends ViewGroup
         mOnRefreshListener = listener;
     }
 
-    public interface OnRefreshListener {
-        void onRefresh();
-    }
-
     private final Animation.AnimationListener refreshingListener = new Animation.AnimationListener() {
 
 
@@ -665,6 +664,13 @@ public class NestedRefreshLayout extends ViewGroup
                 pullState = IPullRefreshView.State.GONE;
                 pullRefreshView.onPullHided();
             }
+        }
+    };
+
+    private final Runnable delayAnimToStartPosTask=new Runnable() {
+        @Override
+        public void run() {
+            animToStartPosition(pullHelper.getScroll(), resetListener, 0);
         }
     };
 
@@ -704,6 +710,10 @@ public class NestedRefreshLayout extends ViewGroup
         public void setAnimDuration(int animDuration) {
             this.animDuration = animDuration;
         }
+    }
+
+    public interface OnRefreshListener {
+        void onRefresh();
     }
 
 }

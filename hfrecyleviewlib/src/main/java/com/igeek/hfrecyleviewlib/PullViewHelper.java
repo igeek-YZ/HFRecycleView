@@ -102,7 +102,7 @@ public class PullViewHelper {
     }
 
     public boolean canTouchUpToRefresh() {
-        return getScrollPercent() > refreshPercentage;
+        return getScrollPercent() >= refreshPercentage;
     }
 
     public int getPullRefreshHeight() {

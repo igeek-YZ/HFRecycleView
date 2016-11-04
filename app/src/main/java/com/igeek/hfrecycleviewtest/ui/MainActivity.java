@@ -8,7 +8,6 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
 import com.igeek.hfrecycleviewtest.R;
-import com.orhanobut.logger.Logger;
 
 public class MainActivity extends Activity {
 
@@ -44,7 +43,6 @@ public class MainActivity extends Activity {
         Animation animation=new Animation() {
             @Override
             protected void applyTransformation(float interpolatedTime, Transformation t) {
-                Logger.i("interpolatedTime="+interpolatedTime);
             }
         };
 
