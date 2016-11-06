@@ -502,12 +502,14 @@ public class NestedRefreshLayout extends ViewGroup
 
     //手离开屏幕后检查和更新状态
     private synchronized void checkSpringBack() {
-        Log.i(TAG,"checkSpringBack ->pullState="+pullState.toString()+" canTouchUpToRefresh="+pullHelper.canTouchUpToRefresh());
+//        Log.i(TAG,"checkSpringBack ->\npullState="+pullState.toString()+"\npullHelper.getScroll()="+pullHelper.getScroll()+"\ncanTouchUpToRefresh="+pullHelper.canTouchUpToRefresh());
         if(pullState== IPullRefreshView.State.MOVE_REFRESH){
             if(pullHelper.canTouchUpToRefresh())
                 animToRefreshPosition(pullHelper.getScroll(), null,0);
         }else{
-            froceRefreshToState(pullHelper.canTouchUpToRefresh()&&pullState!= IPullRefreshView.State.MOVE_SRPINGBACK);
+            if(pullState!= IPullRefreshView.State.MOVE_SRPINGBACK){
+                froceRefreshToState(pullHelper.canTouchUpToRefresh());
+            }
         }
     }
 
@@ -549,8 +551,10 @@ public class NestedRefreshLayout extends ViewGroup
 
     //根据手指快速滑动时候的速率滚动视图
     private boolean flingWithNestedDispatch(int velocityY) {
-        final boolean canFling = (pullHelper.canScrollUp() && velocityY > 0) ||
-                (pullHelper.canScrollDown() && velocityY < 0 && (!ViewCompat.canScrollVertically(nestedTarget,-1)));
+        final boolean canFilngUp=pullHelper.canScrollUp() && velocityY > 0;
+//        final boolean canFilngDown=pullHelper.canScrollDown() && velocityY < 0 && (!ViewCompat.canScrollVertically(nestedTarget,-1));
+//        final boolean canFling = canFilngUp || canFilngDown;
+        final boolean canFling = canFilngUp ;
         if (!dispatchNestedPreFling(0, velocityY)) {
             dispatchNestedFling(0, velocityY, canFling);
             if (canFling) {
@@ -567,8 +571,9 @@ public class NestedRefreshLayout extends ViewGroup
             int oldY = getScrollY();
             int x = mScroller.getCurrX();
             int y = mScroller.getCurrY();
+            final int deltay=y-oldY;
             if (oldX != x || oldY != y) {
-                scrollMoveOffset(y-oldY);
+                scrollMoveOffset(deltay);
                 ViewCompat.postInvalidateOnAnimation(this);
             }
         }
@@ -630,42 +635,35 @@ public class NestedRefreshLayout extends ViewGroup
         mOnRefreshListener = listener;
     }
 
-    private final Animation.AnimationListener refreshingListener = new Animation.AnimationListener() {
-
-
+    private final PullAnimationListener refreshingListener=new PullAnimationListener() {
         @Override
-        public void onAnimationStart(Animation animation) {
+        public void start(Animation animation) {
             pullRefreshView.onPullRefresh();
         }
 
         @Override
-        public void onAnimationRepeat(Animation animation) {
-        }
-
-        @Override
-        public void onAnimationEnd(Animation animation) {
+        public void end(Animation animation) {
             if (mOnRefreshListener != null) {
                 mOnRefreshListener.onRefresh();
             }
         }
     };
 
-    private final Animation.AnimationListener resetListener = new Animation.AnimationListener() {
+    private final PullAnimationListener resetListener=new PullAnimationListener() {
         @Override
-        public void onAnimationStart(Animation animation) {
+        public void start(Animation animation) {
             pullState= IPullRefreshView.State.MOVE_SRPINGBACK;
         }
+
         @Override
-        public void onAnimationRepeat(Animation animation) {
-        }
-        @Override
-        public void onAnimationEnd(Animation animation) {
+        public void end(Animation animation) {
             if(pullHelper.getScroll()==0){
                 pullState = IPullRefreshView.State.GONE;
                 pullRefreshView.onPullHided();
             }
         }
     };
+
 
     private final Runnable delayAnimToStartPosTask=new Runnable() {
         @Override
@@ -710,6 +708,29 @@ public class NestedRefreshLayout extends ViewGroup
         public void setAnimDuration(int animDuration) {
             this.animDuration = animDuration;
         }
+    }
+
+    public static abstract class PullAnimationListener implements Animation.AnimationListener{
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+            start(animation);
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            end(animation);
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
+
+        public abstract void start(Animation animation);
+
+        public abstract void end(Animation animation);
+
     }
 
     public interface OnRefreshListener {
