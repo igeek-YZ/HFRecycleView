@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -81,6 +82,7 @@ public class HeadFootActivity extends Activity implements
         refreshLayout.setOnRefreshListener(new NestedRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                Log.i(HeadFootActivity.class.getSimpleName(),"--> refreshFinish ");
                 refreshFinish();
 //                Toast.makeText(HeadFootActivity.this,"onRefresh",Toast.LENGTH_SHORT).show();
             }

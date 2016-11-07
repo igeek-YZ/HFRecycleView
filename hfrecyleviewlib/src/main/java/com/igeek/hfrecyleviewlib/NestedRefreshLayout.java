@@ -10,7 +10,6 @@ import android.support.v4.view.NestedScrollingParentHelper;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ScrollerCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -639,13 +638,13 @@ public class NestedRefreshLayout extends ViewGroup
         @Override
         public void start(Animation animation) {
             pullRefreshView.onPullRefresh();
+            if (mOnRefreshListener != null) {
+                mOnRefreshListener.onRefresh();
+            }
         }
 
         @Override
         public void end(Animation animation) {
-            if (mOnRefreshListener != null) {
-                mOnRefreshListener.onRefresh();
-            }
         }
     };
 
