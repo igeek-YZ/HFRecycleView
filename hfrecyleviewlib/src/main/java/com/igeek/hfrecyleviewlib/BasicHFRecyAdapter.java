@@ -260,8 +260,7 @@ public abstract class BasicHFRecyAdapter<T> extends RecyclerView.Adapter<BasicRe
      */
     public void refreshDatas(List<T> datas) {
         if (datas != null) {
-            this.datas.clear();
-            this.datas.addAll(datas);
+            this.datas=datas;
             notifyDataSetChanged();
 //            final int offest=(headView == null ? 0 : 1);
 //            notifyItemRangeChanged(0+offest, datas.size());
@@ -274,7 +273,7 @@ public abstract class BasicHFRecyAdapter<T> extends RecyclerView.Adapter<BasicRe
     public void insertData(int position, T data) {
         if (position >= 0 && position < getItemCount() - (footView == null ? 0 : 1) && data != null) {
             this.datas.add(position, data);
-            notifyItemInserted(position - (headView == null ? 0 : 1));
+            notifyItemInserted(position + (headView == null ? 0 : 1));
         }
     }
 
@@ -284,7 +283,7 @@ public abstract class BasicHFRecyAdapter<T> extends RecyclerView.Adapter<BasicRe
     public void insertDatas(int position, List<T> datas) {
         if (position >= 0 && position < getItemCount() - (footView == null ? 0 : 1) && datas != null) {
             this.datas.addAll(position, datas);
-            notifyItemRangeInserted(position - (headView == null ? 0 : 1), this.datas.size());
+            notifyItemRangeInserted(position + (headView == null ? 0 : 1), datas.size());
         }
     }
 
